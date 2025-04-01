@@ -4,42 +4,49 @@ A stealthy, cross-platform reverse shell generator in Rust.
 
 ## Features
 
-### Multiple Connection Methods
-- TCP
-- UDP
-- WebSocket
-- HTTP (planned)
-- DNS tunneling (planned)
-- ICMP tunneling (planned)
+- **Multiple Connection Methods**
+  - TCP
+  - UDP
+  - WebSocket
+  - HTTP (planned)
+  - DNS tunneling (planned)
+  - ICMP tunneling (planned)
 
-### Advanced Anti-Detection
-- VM detection
-- Sandbox detection
-- Debugger detection
-- Analysis tool detection
+- **Advanced Anti-Detection**
+  - VM detection
+  - Sandbox detection
+  - Debugger detection
+  - Analysis tool detection
 
-### Defense Evasion
-- Signature detection evasion
-- Behavior detection evasion
-- Network detection evasion
-- Process detection evasion
-- File detection evasion
-- Registry detection evasion
+- **Defense Evasion**
+  - Signature detection evasion
+  - Behavior detection evasion
+  - Network detection evasion
+  - Process detection evasion
+  - File detection evasion
+  - Registry detection evasion
 
-### Network Stealth
-- Traffic pattern manipulation
-- Domain fronting
-- Traffic encryption
-- Traffic fragmentation
-- Traffic timing
-- Normal traffic simulation
+- **Network Stealth**
+  - Traffic pattern manipulation
+  - Domain fronting
+  - Traffic encryption
+  - Traffic fragmentation
+  - Traffic timing
+  - Normal traffic simulation
 
-### Obfuscation Techniques
-- XOR encryption
-- RC4 encryption
-- AES encryption
-- Control flow obfuscation
-- Anti-disassembly techniques
+- **Advanced Persistence**
+  - Registry-based persistence
+  - Service-based persistence
+  - Scheduled task persistence
+  - Custom persistence locations
+  - Persistence evasion techniques
+
+- **Obfuscation Techniques**
+  - XOR encryption
+  - RC4 encryption
+  - AES encryption
+  - Control flow obfuscation
+  - Anti-disassembly techniques
 
 ### Security Features
 - TLS support

