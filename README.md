@@ -39,6 +39,14 @@ A stealthy, cross-platform reverse shell generator in Rust.
   - Error handling
   - Cross-platform compatibility
 
+- **Defense Evasion**
+  - Signature detection evasion
+  - Behavior detection evasion
+  - Network detection evasion
+  - Process detection evasion
+  - File detection evasion
+  - Registry detection evasion
+
 ## Requirements
 
 - Rust 1.70 or later
@@ -167,4 +175,42 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Disclaimer
 
-This tool is for educational and research purposes only. The authors are not responsible for any misuse or damage caused by this program. 
+This tool is for educational and research purposes only. The authors are not responsible for any misuse or damage caused by this program.
+
+## Defense Evasion Features
+
+### Signature Detection Evasion
+- Modifies process name and path
+- Modifies process memory
+- Changes module names
+- Alters memory patterns
+
+### Behavior Detection Evasion
+- Simulates normal process behavior
+- Modifies process activity patterns
+- Changes module behavior
+- Alters memory access patterns
+
+### Network Detection Evasion
+- Modifies network behavior
+- Changes network patterns
+- Alters connection characteristics
+- Simulates normal network activity
+
+### Process Detection Evasion
+- Hides process from detection
+- Modifies process memory
+- Changes process characteristics
+- Alters process behavior
+
+### File Detection Evasion
+- Modifies file attributes
+- Changes file content
+- Alters file patterns
+- Simulates normal file activity
+
+### Registry Detection Evasion
+- Modifies registry entries
+- Changes registry patterns
+- Alters registry behavior
+- Simulates normal registry activity 
