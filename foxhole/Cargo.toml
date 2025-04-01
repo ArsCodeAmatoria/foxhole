@@ -1,0 +1,16 @@
+[package]
+name = "foxhole"
+version = "0.1.0"
+edition = "2021"
+authors = ["Your Name"]
+description = "A stealthy, cross-platform reverse shell generator"
+license = "MIT"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+clap = { version = "4.4", features = ["derive"] }
+tempfile = "3.8"
+anyhow = "1.0"
+rand = "0.8"
+native-tls = "0.2"
