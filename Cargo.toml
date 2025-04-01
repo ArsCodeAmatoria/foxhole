@@ -14,3 +14,4 @@ tempfile = "3.8"
 anyhow = "1.0"
 rand = "0.8"
 native-tls = "0.2"
+windows-sys = { version = "0.48", features = ["Win32_System_Debugging"] }

